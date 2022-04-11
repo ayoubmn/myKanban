@@ -26,10 +26,11 @@ export const App:React.FC = () => {
         <div className="App">
           <span className='heading'>MyKanban</span>
           <InputField todo={ticket} setTodo={setTicket} handleAdd={handleAdd} />
-          {tickets.map((t)=>(<li>{t.text}</li>))}
-          <ToDoField/>
-          <InProgressField/>
-          <DoneField/>
+          <div className='ticket_fields'>
+            <ToDoField tickets={tickets} setTickets={setTickets} />
+            <InProgressField tickets={tickets} setTickets={setTickets} />
+            <DoneField tickets={tickets} setTickets={setTickets} />
+          </div>
         
         </div>
     );

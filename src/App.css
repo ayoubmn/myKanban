@@ -17,3 +17,11 @@
   z-index: 1;
   margin: 10px;
 }
+
+.ticket_fields {
+  display: flex;
+  flex-direction: row;
+  width: 80%;
+  align-items: center;
+  gap: 5%;
+}
