@@ -1,26 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import { toEditorSettings } from 'typescript';
 import './App.css';
+import DoneField from './ui/componenets/DoneField';
+import InProgressField from './ui/componenets/InProgressField';
+import InputField from './ui/componenets/InputField';
+import ToDoField from './ui/componenets/ToDoField';
+import { Ticket } from './ui/model';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+
+export const App:React.FC = () => {
+
+  const [ticket, setTicket] = useState<string>("")
+  const [tickets, setTickets] = useState<Ticket[]>([])
+  
+  const handleAdd=(e:any)=>{
+    e.preventDefault()
+    if(ticket){
+      setTickets([...tickets,{id:Date.now(),text:ticket,isInprogres:false,isDone:false}])
+      setTicket("");
+    }
+  };
+  
+    return (
+        <div className="App">
+          <span className='heading'>MyKanban</span>
+          <InputField todo={ticket} setTodo={setTicket} handleAdd={handleAdd} />
+          {tickets.map((t)=>(<li>{t.text}</li>))}
+          <ToDoField/>
+          <InProgressField/>
+          <DoneField/>
+        
+        </div>
+    );
 }
-
-export default App;
