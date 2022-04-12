@@ -1,4 +1,5 @@
 import React from 'react'
+import { Draggable, Droppable } from 'react-beautiful-dnd';
 import { Ticket } from '../../model';
 import Ticket_box from '../Ticket_box';
 
@@ -13,12 +14,17 @@ const ToDoField = ({tickets,setTickets}:Props) => {
       <div className='field_header'>
       To Do
       </div>
-      {tickets.map((t)=>(
-      
-        <Ticket_box ticket={t} />
-      
-      ))}
-
+      <Droppable droppableId='todo'>
+        {(provided)=>( <div ref={provided.innerRef} {...provided.droppableProps} >
+        {tickets.map((t,index)=>(
+        
+          <Ticket_box ticket={t} index={index} />
+        
+        ))}
+        {provided.placeholder}
+        </div>
+      )}
+      </Droppable>
     </div>
   )
 }

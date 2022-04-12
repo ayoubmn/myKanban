@@ -1,14 +1,21 @@
 import React from 'react'
+import { Draggable } from 'react-beautiful-dnd'
 import { Ticket } from '../../model'
 interface Props{
   ticket:Ticket
+  index: number;
+
 }
 
-const Ticket_box = ({ticket}:Props) => {
+const Ticket_box = ({ticket,index}:Props) => {
   return (
-    <div className='ticket_box'>
+    <Draggable draggableId={ticket.id.toString()} index={index}>
+      {(provided)=>(    
+      <div className='ticket_box' {...provided.draggableProps}{...provided.dragHandleProps}ref={provided.innerRef}>
       {ticket.text}
-    </div>
+    </div>)}
+    </Draggable>
+
   )
 }
 
